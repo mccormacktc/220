@@ -19,12 +19,13 @@ def main():
 # enter the day of the billing cycle in which the payment was made: 20
     paymentday = eval(input("Enter the day of the billing cycle in which the payment was made: "))
 
-    x = previousbalance * daysincycle
-    y = paymentamount * (daysincycle - paymentday)
-    z = x - y
-    avgdailybalance = z / daysincycle
+    varone = previousbalance * daysincycle
+    vartwo = paymentamount * (daysincycle - paymentday)
+    varthree = varone - vartwo
+    avgdailybalance = varthree / daysincycle
     monthlyintrate = annualinterest / 1200
     intcharge = avgdailybalance * monthlyintrate
-    print(intcharge)
+    print(round(intcharge, 2))
 
-main()
+if __name__ == '__main__':
+    main()
