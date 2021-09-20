@@ -4,6 +4,7 @@ Name: <your name goes here – first and last>
 """
 
 from graphics import *
+import math
 
 
 def squares():
@@ -34,21 +35,30 @@ def squares():
     instructions.draw(win)
 
     # builds a circle
-    shape = Circle(Point(50, 50), 20)
+    shape = Rectangle(Point(50, 50), Point(70, 70))
     shape.setOutline("red")
     shape.setFill("red")
     shape.draw(win)
 
+
     # allows the user to click multiple times to move the circle
     for i in range(num_clicks):
-        p = win.getMouse()
-        c = shape.getCenter()  # center of circle
+        userClick = win.getMouse()
+        # builds a circle
+        shape = Rectangle(Point(userClick.x - 10, userClick.y - 10), Point(userClick.x + 10, userClick.y + 10))
+        shape.setOutline("red")
+        shape.setFill("red")
+        shape.draw(win)
 
         # move amount is distance from center of circle to the
-        # point where the user clicked
-        dx = p.getX() - c.getX()
-        dy = p.getY() - c.getY()
-        shape.move(dx, dy)
+        # # point where the user clicked
+        # dx = p.getX() - c.getX()
+        # dy = p.getY() - c.getY()
+        # shape.move(dx, dy)
+
+    final_pt = Point(width / 2, 20)
+    final = Text(final_pt, "Click to close the window")
+    final.draw(win)
 
     win.getMouse()
     win.close()
@@ -62,11 +72,63 @@ def rectangle():
          Print the perimeter and area of the rectangle.
     Formulas: area = (length)(width)   and    perimeter = 2(length+width)
     """
-    pass
+    win = GraphWin("Rectangles Function", 400, 400)
+    point1 = win.getMouse()
+    point2 = win.getMouse()
+    rect = Rectangle(point1, point2)
+    rect.draw(win)
 
+    shapeWidth = abs(point1.getX() - point2.getX())
+    shapeLength = abs(point1.getY() - point2.getY())
+
+    area = shapeLength * shapeWidth
+
+    area_pt = Point(200, 200)
+    areatxt = Text(area_pt, "The area is: " + str(area))
+    areatxt.draw(win)
+
+    per_pt = Point(200, 300)
+    perimeter = 2 * (shapeWidth + shapeLength)
+    pertxt = Text(per_pt, "The perimeter is: " + str(perimeter))
+    pertxt.draw(win)
+
+    win.getMouse()
+    win.close()
+
+def circle():
+    win = GraphWin("Circle Function", 400, 400)
+    p1 = win.getMouse()
+    p2 = win.getMouse()
+    x1 = p1.getX()
+    x2 = p2.getX()
+    y1 = p1.getY()
+    y2 = p2.getY()
+    r = math.sqrt((x2 - x1) ** 2 + (y2-y1) ** 2)
+    circ = Circle(p1, r)
+    circ.draw(win)
+
+    rad_pt = Point(200, 20)
+    radtxt = Text(rad_pt, "The radius is " + str(r) + ". Please click again to close the window")
+    radtxt.draw(win)
+
+    win.getMouse()
+    win.close()
+
+
+
+def pi2():
+    numPi = eval(input("Enter the number of terms for approximation of pi: "))
+    acc = 0
+    for i in range(numPi):
+        num = 4
+        denom = 1 + 2 * i
+        frac = (num / denom) * ((-1)**i)
+        acc = acc + frac
+    print(acc)
+    print(math.pi - acc)
 
 def main():
-    squares()
+    # squares()
     # rectangle()
     # circle()
     # pi2()
