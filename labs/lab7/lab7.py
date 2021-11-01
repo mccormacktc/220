@@ -12,7 +12,7 @@ def encode():
     primarymsg = input("Enter your message")
     for x in primarymsg:
         newval = ord(x) + 3
-        print(chr(newval), end ="")
+        print(chr(newval), end = "")
     print(" ")
 
 def sphere_area(radius):
